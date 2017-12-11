@@ -39,12 +39,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Transition enterTransition = new Slide().setDuration(2500);
+            Transition enterTransition = new Slide().setDuration(500);
             Transition noTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.no_transition);
 //            Transition sharedElementEnterTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.move);
-            Transition sharedElementEnterTransition = new CardTransition();
-            sharedElementEnterTransition.setDuration(2500);
-            sharedElementEnterTransition.setStartDelay(500);
+            Transition sharedElementEnterTransition = new RoundTransition();
+            sharedElementEnterTransition.setDuration(500);
 
             previousFragment.setExitTransition(noTransition);
 
