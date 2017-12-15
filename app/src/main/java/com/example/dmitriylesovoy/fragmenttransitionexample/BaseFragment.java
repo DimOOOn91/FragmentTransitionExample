@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment{
 
     public static final String ANIMAL_ID = "animal_id";
+    public static final String ANIMAL_LIST = "animal_list";
 
     @Nullable
     @Override

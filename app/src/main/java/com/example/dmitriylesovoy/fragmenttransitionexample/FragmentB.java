@@ -3,17 +3,19 @@ package com.example.dmitriylesovoy.fragmenttransitionexample;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 public class FragmentB extends BaseFragment {
 
     private ViewPager vpSmallCards;
-    private CardsAdapter adapter;
+    private AnimalsAdapter adapter;
     private int selectedAnimalId;
+    private ArrayList<Integer> animals;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,15 +38,16 @@ public class FragmentB extends BaseFragment {
     protected void parseParameters(Bundle parameters) {
         if (parameters != null && !parameters.isEmpty()) {
             selectedAnimalId = parameters.getInt(ANIMAL_ID, 0);
+            animals = parameters.getIntegerArrayList(ANIMAL_LIST);
         }
     }
 
     @Override
     protected void initViews(View rootView) {
         vpSmallCards = rootView.findViewById(R.id.vp_small_cards);
-        adapter = new CardsAdapter();
+        adapter = new AnimalsAdapter();
+        adapter.setAnimals(animals == null ? new ArrayList<Integer>() : animals);
         vpSmallCards.setAdapter(adapter);
-        adapter.setAnimals(2,4,6,1,3,5);
         int animalPositionById = adapter.getAnimalPositionById(selectedAnimalId);
         vpSmallCards.setCurrentItem(animalPositionById, false);
     }

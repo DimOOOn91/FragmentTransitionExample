@@ -9,21 +9,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CardsAdapter extends PagerAdapter {
+public class AnimalsAdapter extends PagerAdapter {
 
-    private List<Integer> animals;
-    private AnimalClickListener clickListener;
+    ArrayList<Integer> animals;
+    AnimalClickListener clickListener;
 
     public void setAnimals(Integer... animalsId) {
-        this.animals = Arrays.asList(animalsId);
+        this.animals = new ArrayList<>(Arrays.asList(animalsId));
+        notifyDataSetChanged();
+    }
+
+    public void setAnimals(ArrayList<Integer> animalsId) {
+        this.animals = animalsId;
         notifyDataSetChanged();
     }
 
     public void setClickListener(AnimalClickListener clickListener) {
         this.clickListener = clickListener;
+    }
+
+    public void addAnimal() {
+        if (animals == null) {
+            animals = new ArrayList<>();
+        }
+        animals.add(animals.size());
+        notifyDataSetChanged();
     }
 
     @Override
@@ -72,6 +86,10 @@ public class CardsAdapter extends PagerAdapter {
 
     public int getAnimalPositionById(int selectedAnimalId) {
         return animals.indexOf(selectedAnimalId);
+    }
+
+    public ArrayList<Integer> getAnimals() {
+        return animals == null ? new ArrayList<Integer>() : animals;
     }
 
     interface AnimalClickListener {
